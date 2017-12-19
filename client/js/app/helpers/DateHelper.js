@@ -1,11 +1,14 @@
 class DateHelper {
-    constructor {
+    constructor() {
         throw new Error('Esta Classe não pode ser instanciada')
     }
     
     //metodos estaticos nao precisam de instancia para serem acessados
 
     static textoParaData(texto) {
+        if(!/\d{4}-\d{2}-\d{2}/.test(texto)) {
+            throw new Error("Deve estar no formato aaaa-mm-ss");
+        }
          // let data = new Date(this._inputData.value.replace(/-/g, ','); //replace (global ' - ', por ', ')
         return new Date(...texto.split('-') //cortar em itens, com criterio o hifen // ... assimila [0] de um vetor com o parametro do outro
         .map(function (item, indice) {
@@ -18,9 +21,6 @@ class DateHelper {
     }
     
     static dataParaTexto(data) {
-        return data.getDate() 
-        + '/' + (data.getMonth()+1) //parenteses para usar como int antes de concatenar como string
-        + '/'+ data.getFullYear();
-        
+        return `${data.getDate()}/${data.getMonth()+1}/${data.getFullYear()}`
     }
 }
